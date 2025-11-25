@@ -35,12 +35,12 @@
                     <div class="mb-3"><label for="direccionLocal" class="form-label">Lugar de la
                             Infracción</label><input type="text" class="form-control" id="direccionLocal"
                             th:field="*{direccionLocal}" required th:disabled="${readonly}"></div>
-                    <div class="mb-3"><label for="dimensiones" class="form-label">Monto</label><input type="text"
-                            class="form-control" id="dimensiones" th:field="*{dimensiones}" placeholder="Ej: $5000"
+                    <div class="mb-3"><label for="monto" class="form-label">Monto</label><input type="number"
+                            step="0.01" class="form-control" id="monto" th:field="*{monto}" placeholder="Ej: 5000.00"
                             th:disabled="${readonly}"></div>
 
-                    <h5 class="mb-3 text-primary mt-4">Estado del Trámite</h5>
-                    <div class="mb-3">
+                    <h5 class="mb-3 text-primary mt-4" th:if="${tramite.id != null}">Estado del Trámite</h5>
+                    <div class="mb-3" th:if="${tramite.id != null}">
                         <label for="estado" class="form-label">Estado</label>
                         <select class="form-select" id="estado" th:field="*{estado}" th:disabled="${readonly}">
                             <option

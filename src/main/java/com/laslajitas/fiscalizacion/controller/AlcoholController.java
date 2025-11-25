@@ -22,6 +22,9 @@ public class AlcoholController {
     @Autowired
     private TramiteRepository tramiteRepository;
 
+    @Autowired
+    private com.laslajitas.fiscalizacion.service.TramiteService tramiteService;
+
     @GetMapping
     public String index(Model model) {
         model.addAttribute("pageTitle", "Licencias de Venta de Alcohol");
@@ -51,9 +54,12 @@ public class AlcoholController {
                 tramite.setEstado(EstadoTramite.PENDIENTE);
             }
             tramite.setFecha(LocalDate.now());
+            // Set default expiration to 1 year from now
+            tramite.setFechaVencimiento(LocalDate.now().plusYears(1));
         }
 
         tramiteRepository.save(tramite);
+        tramiteService.verificarYCrearNotificacion(tramite);
         return "redirect:/alcohol";
     }
 

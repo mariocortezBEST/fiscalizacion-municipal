@@ -2,22 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: html(~{::content})}">
 
 <head>
-    <title>Habilitaciones</title>
+    <title>Notificaciones</title>
 </head>
 
 <body>
     <div th:fragment="content">
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Habilitaciones Comerciales</h1>
+            <h1 class="h2">Notificaciones</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group me-2">
                     <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-file-export"></i> Exportar
-                    </button>
+                        data-bs-toggle="dropdown"><i class="fa-solid fa-file-export"></i> Exportar</button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/reportes/exportar/habilitaciones?format=pdf">PDF</a></li>
+                        <li><a class="dropdown-item" href="/reportes/exportar/notificaciones?format=pdf">PDF</a></li>
                     </ul>
                 </div>
                 <div class="btn-group me-2">
@@ -28,25 +26,22 @@
                     <ul class="dropdown-menu">
                         <li>
                             <a class="dropdown-item" target="_blank"
-                                href="https://wa.me/?text=Listado%20de%20Habilitaciones%20Comerciales">
+                                href="https://wa.me/?text=Listado%20de%20Notificaciones">
                                 <i class="fa-brands fa-whatsapp text-success"></i> WhatsApp
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item"
-                                href="mailto:?subject=Listado%20de%20Habilitaciones&body=Adjunto%20el%20enlace%20al%20listado%20de%20habilitaciones%20comerciales.">
+                                href="mailto:?subject=Listado%20de%20Notificaciones&body=Adjunto%20el%20enlace%20al%20listado%20de%20notificaciones.">
                                 <i class="fa-solid fa-envelope text-primary"></i> Email
                             </a>
                         </li>
                     </ul>
                 </div>
-                <a href="/habilitaciones/nueva" class="btn btn-sm btn-primary">
-                    <i class="fa-solid fa-plus"></i> Nueva Habilitación
-                </a>
+                <a href="/notificaciones/nueva" class="btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> Nueva
+                    Notificación</a>
             </div>
         </div>
-
-
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -54,56 +49,46 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Solicitante</th>
-                                <th>Rubro/Fantasía</th>
-                                <th>Dirección</th>
+                                <th>Destinatario</th>
+                                <th>Mensaje</th>
                                 <th>Estado</th>
                                 <th>Fecha</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="t : ${habilitaciones}">
+                            <tr th:each="t : ${notificaciones}">
                                 <td th:text="${t.id}">1</td>
                                 <td th:text="${t.solicitante}">Juan Perez</td>
-                                <td th:text="${t.descripcion}">Kiosco</td>
-                                <td th:text="${t.direccionLocal}">Av. Siempre Viva 123</td>
+                                <td th:text="${t.descripcion}">Mensaje de notificación...</td>
                                 <td>
                                     <span class="badge bg-warning text-dark"
-                                        th:if="${t.estado.name() == 'INSPECCION_PENDIENTE'}">Pendiente</span>
+                                        th:if="${t.estado.name() == 'PENDIENTE'}">Pendiente</span>
+                                    <span class="badge bg-info text-dark" th:if="${t.estado.name() == 'EN_PROCESO'}">En
+                                        Proceso</span>
                                     <span class="badge bg-success"
-                                        th:if="${t.estado.name() == 'FINALIZADO'}">Habilitado</span>
+                                        th:if="${t.estado.name() == 'FINALIZADO'}">Enviada</span>
                                     <span class="badge bg-danger" th:if="${t.estado.name() == 'VENCIDA'}">Vencida</span>
                                     <span class="badge bg-secondary"
-                                        th:unless="${t.estado.name() == 'INSPECCION_PENDIENTE' or t.estado.name() == 'FINALIZADO' or t.estado.name() == 'VENCIDA'}"
+                                        th:unless="${t.estado.name() == 'PENDIENTE' or t.estado.name() == 'EN_PROCESO' or t.estado.name() == 'FINALIZADO' or t.estado.name() == 'VENCIDA'}"
                                         th:text="${t.estado}">Estado</span>
                                 </td>
                                 <td th:text="${#temporals.format(t.fecha, 'dd/MM/yyyy')}">01/01/2024</td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a th:href="@{/habilitaciones/ver/{id}(id=${t.id})}"
-                                            class="btn btn-sm btn-outline-primary" title="Ver">
-                                            <i class="fa-solid fa-eye"></i>
-                                        </a>
-                                        <a th:href="@{/habilitaciones/editar/{id}(id=${t.id})}"
-                                            class="btn btn-sm btn-outline-warning" title="Editar">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                        <a th:href="@{/reportes/exportar/habilitaciones/{id}?format=pdf(id=${t.id})}"
+                                        <a th:href="@{/notificaciones/ver/{id}(id=${t.id})}"
+                                            class="btn btn-sm btn-outline-primary" title="Ver"><i
+                                                class="fa-solid fa-eye"></i></a>
+                                        <a th:href="@{/notificaciones/editar/{id}(id=${t.id})}"
+                                            class="btn btn-sm btn-outline-warning" title="Editar"><i
+                                                class="fa-solid fa-pen-to-square"></i></a>
+                                        <a th:href="@{/reportes/exportar/notificaciones/{id}?format=pdf(id=${t.id})}"
                                             class="btn btn-sm btn-outline-secondary" title="Exportar PDF"
-                                            target="_blank">
-                                            <i class="fa-solid fa-file-pdf"></i>
-                                        </a>
-                                        <a th:if="${t.estado.name() == 'FINALIZADO'}"
-                                            th:href="@{/reportes/certificado/habilitaciones/{id}(id=${t.id})}"
-                                            class="btn btn-sm btn-outline-success" title="Certificado" target="_blank">
-                                            <i class="fa-solid fa-certificate"></i>
-                                        </a>
-                                        <a th:href="@{/habilitaciones/eliminar/{id}(id=${t.id})}"
+                                            target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
+                                        <a th:href="@{/notificaciones/eliminar/{id}(id=${t.id})}"
                                             class="btn btn-sm btn-outline-danger" title="Eliminar"
-                                            onclick="return confirm('¿Está seguro de eliminar esta habilitación?');">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </a>
+                                            onclick="return confirm('¿Está seguro de eliminar esta notificación?');"><i
+                                                class="fa-solid fa-trash"></i></a>
                                         <div class="btn-group" role="group">
                                             <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle"
                                                 data-bs-toggle="dropdown" aria-expanded="false" title="Compartir">
@@ -112,13 +97,13 @@
                                             <ul class="dropdown-menu">
                                                 <li>
                                                     <a class="dropdown-item" target="_blank"
-                                                        th:href="@{'https://wa.me/?text=Habilitación Comercial: ' + ${t.solicitante} + ' - ' + ${t.descripcion} + ' - ' + ${t.direccionLocal}}">
+                                                        th:href="@{'https://wa.me/?text=Notificación: ' + ${t.solicitante} + ' - ' + ${t.descripcion}}">
                                                         <i class="fa-brands fa-whatsapp text-success"></i> WhatsApp
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a class="dropdown-item"
-                                                        th:href="@{'mailto:?subject=Habilitación Comercial&body=Habilitación Comercial:%0D%0ASolicitante: ' + ${t.solicitante} + '%0D%0ARubro: ' + ${t.descripcion} + '%0D%0ADirección: ' + ${t.direccionLocal}}">
+                                                        th:href="@{'mailto:?subject=Notificación&body=Notificación:%0D%0ADestinatario: ' + ${t.solicitante} + '%0D%0AMensaje: ' + ${t.descripcion}}">
                                                         <i class="fa-solid fa-envelope text-primary"></i> Email
                                                     </a>
                                                 </li>
@@ -127,8 +112,8 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr th:if="${#lists.isEmpty(habilitaciones)}">
-                                <td colspan="7" class="text-center text-muted">No hay habilitaciones registradas.</td>
+                            <tr th:if="${#lists.isEmpty(notificaciones)}">
+                                <td colspan="6" class="text-center text-muted">No hay notificaciones registradas.</td>
                             </tr>
                         </tbody>
                     </table>

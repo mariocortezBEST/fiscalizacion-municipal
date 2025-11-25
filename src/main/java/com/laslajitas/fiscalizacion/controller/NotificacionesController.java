@@ -16,34 +16,31 @@ import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/eventos")
-public class EventosController {
+@RequestMapping("/notificaciones")
+public class NotificacionesController {
 
     @Autowired
     private TramiteRepository tramiteRepository;
 
-    @Autowired
-    private com.laslajitas.fiscalizacion.service.TramiteService tramiteService;
-
     @GetMapping
     public String index(Model model) {
-        model.addAttribute("pageTitle", "Permisos de Eventos");
-        model.addAttribute("eventos", tramiteRepository.findAll().stream()
-                .filter(t -> t.getTipo() == TipoTramite.EVENTO)
+        model.addAttribute("pageTitle", "Notificaciones");
+        model.addAttribute("notificaciones", tramiteRepository.findAll().stream()
+                .filter(t -> t.getTipo() == TipoTramite.NOTIFICACION)
                 .collect(Collectors.toList()));
-        return "eventos/index";
+        return "notificaciones/index";
     }
 
-    @GetMapping("/nuevo")
-    public String nuevoEvento(Model model) {
-        model.addAttribute("pageTitle", "Nuevo Permiso de Evento");
+    @GetMapping("/nueva")
+    public String nuevaNotificacion(Model model) {
+        model.addAttribute("pageTitle", "Nueva Notificación");
         model.addAttribute("tramite", new Tramite());
-        return "eventos/form";
+        return "notificaciones/form";
     }
 
     @PostMapping("/guardar")
-    public String guardarEvento(Tramite tramite) {
-        tramite.setTipo(TipoTramite.EVENTO);
+    public String guardarNotificacion(Tramite tramite) {
+        tramite.setTipo(TipoTramite.NOTIFICACION);
 
         if (tramite.getId() != null) {
             Tramite existingTramite = tramiteRepository.findById(tramite.getId())
@@ -57,32 +54,31 @@ public class EventosController {
         }
 
         tramiteRepository.save(tramite);
-        tramiteService.verificarYCrearNotificacion(tramite);
-        return "redirect:/eventos";
+        return "redirect:/notificaciones";
     }
 
     @GetMapping("/ver/{id}")
-    public String verEvento(@PathVariable Long id, Model model) {
-        model.addAttribute("pageTitle", "Ver Permiso de Evento");
+    public String verNotificacion(@PathVariable Long id, Model model) {
+        model.addAttribute("pageTitle", "Ver Notificación");
         model.addAttribute("tramite", tramiteRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid tramite Id:" + id)));
         model.addAttribute("readonly", true);
-        return "eventos/form";
+        return "notificaciones/form";
     }
 
     @GetMapping("/editar/{id}")
-    public String editarEvento(@PathVariable Long id, Model model) {
-        model.addAttribute("pageTitle", "Editar Permiso de Evento");
+    public String editarNotificacion(@PathVariable Long id, Model model) {
+        model.addAttribute("pageTitle", "Editar Notificación");
         model.addAttribute("tramite", tramiteRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid tramite Id:" + id)));
-        return "eventos/form";
+        return "notificaciones/form";
     }
 
     @GetMapping("/eliminar/{id}")
-    public String eliminarEvento(@PathVariable Long id) {
+    public String eliminarNotificacion(@PathVariable Long id) {
         Tramite tramite = tramiteRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid tramite Id:" + id));
         tramiteRepository.delete(tramite);
-        return "redirect:/eventos";
+        return "redirect:/notificaciones";
     }
 }

@@ -20,11 +20,32 @@
                         <li><a class="dropdown-item" href="/reportes/exportar/habilitaciones?format=pdf">PDF</a></li>
                     </ul>
                 </div>
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa-solid fa-share-nodes"></i> Compartir
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" target="_blank"
+                                href="https://wa.me/?text=Listado%20de%20Habilitaciones%20Comerciales">
+                                <i class="fa-brands fa-whatsapp text-success"></i> WhatsApp
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                                href="mailto:?subject=Listado%20de%20Habilitaciones&body=Adjunto%20el%20enlace%20al%20listado%20de%20habilitaciones%20comerciales.">
+                                <i class="fa-solid fa-envelope text-primary"></i> Email
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 <a href="/habilitaciones/nueva" class="btn btn-sm btn-primary">
                     <i class="fa-solid fa-plus"></i> Nueva Habilitación
                 </a>
             </div>
         </div>
+
 
         <div class="card">
             <div class="card-body">
@@ -83,6 +104,26 @@
                                             onclick="return confirm('¿Está seguro de eliminar esta habilitación?');">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false" title="Compartir">
+                                                <i class="fa-solid fa-share-nodes"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a class="dropdown-item" target="_blank"
+                                                        th:href="@{'https://wa.me/?text=Habilitación Comercial: ' + ${t.solicitante} + ' - ' + ${t.descripcion} + ' - ' + ${t.direccionLocal}}">
+                                                        <i class="fa-brands fa-whatsapp text-success"></i> WhatsApp
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                        th:href="@{'mailto:?subject=Habilitación Comercial&body=Habilitación Comercial:%0D%0ASolicitante: ' + ${t.solicitante} + '%0D%0ARubro: ' + ${t.descripcion} + '%0D%0ADirección: ' + ${t.direccionLocal}}">
+                                                        <i class="fa-solid fa-envelope text-primary"></i> Email
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>

@@ -22,6 +22,9 @@ public class MultasController {
     @Autowired
     private TramiteRepository tramiteRepository;
 
+    @Autowired
+    private com.laslajitas.fiscalizacion.service.TramiteService tramiteService;
+
     @GetMapping
     public String index(Model model) {
         model.addAttribute("pageTitle", "Multas y Sanciones");
@@ -54,6 +57,7 @@ public class MultasController {
         }
 
         tramiteRepository.save(tramite);
+        tramiteService.verificarYCrearNotificacion(tramite);
         return "redirect:/multas";
     }
 

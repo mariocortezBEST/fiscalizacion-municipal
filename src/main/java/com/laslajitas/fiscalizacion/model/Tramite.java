@@ -64,4 +64,11 @@ public class Tramite {
 
     @Column(precision = 10, scale = 2)
     private BigDecimal monto;
+
+    // Campos específicos para Alcohol
+    @Column(length = 50)
+    private String categoria;
+
+    @Column(length = 100)
+    private String horarioVenta;
 }

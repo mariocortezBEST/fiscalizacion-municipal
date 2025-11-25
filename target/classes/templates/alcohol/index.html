@@ -20,6 +20,26 @@
                         <li><a class="dropdown-item" href="/reportes/exportar/alcohol?format=pdf">PDF</a></li>
                     </ul>
                 </div>
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa-solid fa-share-nodes"></i> Compartir
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" target="_blank"
+                                href="https://wa.me/?text=Listado%20de%20Licencias%20de%20Alcohol">
+                                <i class="fa-brands fa-whatsapp text-success"></i> WhatsApp
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                                href="mailto:?subject=Listado%20de%20Licencias%20de%20Alcohol&body=Adjunto%20el%20enlace%20al%20listado%20de%20licencias%20de%20alcohol.">
+                                <i class="fa-solid fa-envelope text-primary"></i> Email
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 <a href="/alcohol/nueva" class="btn btn-sm btn-primary">
                     <i class="fa-solid fa-plus"></i> Nueva Licencia
                 </a>
@@ -85,6 +105,26 @@
                                             onclick="return confirm('¿Está seguro de eliminar esta licencia?');">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false" title="Compartir">
+                                                <i class="fa-solid fa-share-nodes"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a class="dropdown-item" target="_blank"
+                                                        th:href="@{'https://wa.me/?text=Licencia de Alcohol: ' + ${t.solicitante} + ' - ' + ${t.descripcion} + ' - ' + ${t.direccionLocal}}">
+                                                        <i class="fa-brands fa-whatsapp text-success"></i> WhatsApp
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                        th:href="@{'mailto:?subject=Licencia de Alcohol&body=Licencia de Alcohol:%0D%0ASolicitante: ' + ${t.solicitante} + '%0D%0AEstablecimiento: ' + ${t.descripcion} + '%0D%0ADirección: ' + ${t.direccionLocal}}">
+                                                        <i class="fa-solid fa-envelope text-primary"></i> Email
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>

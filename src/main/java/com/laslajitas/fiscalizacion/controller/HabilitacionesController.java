@@ -22,6 +22,9 @@ public class HabilitacionesController {
     @Autowired
     private TramiteRepository tramiteRepository;
 
+    @Autowired
+    private com.laslajitas.fiscalizacion.service.TramiteService tramiteService;
+
     @GetMapping
     public String index(Model model) {
         model.addAttribute("pageTitle", "Habilitaciones Comerciales");
@@ -57,6 +60,7 @@ public class HabilitacionesController {
         }
 
         tramiteRepository.save(tramite);
+        tramiteService.verificarYCrearNotificacion(tramite);
         return "redirect:/habilitaciones";
     }
 

@@ -38,4 +38,21 @@ public class TramiteService {
     public List<Tramite> getRecentActivity() {
         return tramitesRepository.findTop5ByOrderByFechaDesc();
     }
+
+    public void verificarYCrearNotificacion(Tramite tramite) {
+        if (tramite.getEstado() == EstadoTramite.FINALIZADO) {
+            Tramite notificacion = new Tramite();
+            notificacion.setTipo(TipoTramite.NOTIFICACION);
+            notificacion.setSolicitante(tramite.getSolicitante());
+            notificacion.setDni(tramite.getDni());
+            notificacion.setEmail(tramite.getEmail());
+            notificacion.setTelefono(tramite.getTelefono());
+            notificacion.setLocalidad(tramite.getLocalidad());
+            notificacion.setDescripcion("Su trámite de tipo " + tramite.getTipo()
+                    + " ha finalizado. Por favor pase a retirar su certificado.");
+            notificacion.setEstado(EstadoTramite.PENDIENTE);
+            notificacion.setFecha(java.time.LocalDate.now());
+            tramitesRepository.save(notificacion);
+        }
+    }
 }
