@@ -12,4 +12,9 @@ public class HomeController {
         model.addAttribute("pageTitle", "Panel de Control");
         return "index";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 }

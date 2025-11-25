@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:fragment="html(content)">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    th:fragment="html(content)">
 
 <head>
     <meta charset="UTF-8">
@@ -105,6 +106,33 @@
                             </a>
                         </li>
                     </ul>
+
+                    <h6 sec:authorize="hasRole('ADMIN')"
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Administración</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2" sec:authorize="hasRole('ADMIN')">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/usuarios">
+                                <i class="fa-solid fa-users me-2"></i> Usuarios
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="mt-auto p-3 border-top">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-user-circle fa-2x text-secondary me-2"></i>
+                            <div>
+                                <small class="d-block text-muted">Usuario</small>
+                                <strong sec:authentication="name">Admin</strong>
+                            </div>
+                        </div>
+                        <form th:action="@{/logout}" method="post">
+                            <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                                <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
 

@@ -18,8 +18,26 @@ public class DataInitializer implements CommandLineRunner {
         @Autowired
         private TramiteRepository tramiteRepository;
 
+        @Autowired
+        private com.laslajitas.fiscalizacion.repository.UsuarioRepository usuarioRepository;
+
+        @Autowired
+        private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
+
         @Override
         public void run(String... args) throws Exception {
+                if (usuarioRepository.count() == 0) {
+                        com.laslajitas.fiscalizacion.entity.Usuario admin = new com.laslajitas.fiscalizacion.entity.Usuario();
+                        admin.setUsername("admin");
+                        admin.setPassword(passwordEncoder.encode("admin123"));
+                        admin.setNombre("Administrador");
+                        admin.setApellido("Sistema");
+                        admin.setEmail("admin@laslajitas.gob.ar");
+                        admin.setRol(com.laslajitas.fiscalizacion.enums.Rol.ADMIN);
+                        usuarioRepository.save(admin);
+                        System.out.println("Usuario admin creado: admin / admin123");
+                }
+
                 if (tramiteRepository.count() == 0) {
                         Tramite t1 = new Tramite(null, TipoTramite.COMERCIAL, "Juan Pérez (Kiosco El Paso)", null, null,
                                         null, null,
