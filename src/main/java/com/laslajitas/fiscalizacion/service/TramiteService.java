@@ -55,4 +55,20 @@ public class TramiteService {
             tramitesRepository.save(notificacion);
         }
     }
+
+    public long countTramitesByTipo(TipoTramite tipo) {
+        return tramitesRepository.countByTipo(tipo);
+    }
+
+    public long countTramitesByEstado(EstadoTramite estado) {
+        return tramitesRepository.countByEstado(estado);
+    }
+
+    public java.math.BigDecimal sumMontoMultasFinalizadas() {
+        return tramitesRepository.findAll().stream()
+                .filter(t -> t.getTipo() == TipoTramite.MULTA && t.getEstado() == EstadoTramite.FINALIZADO
+                        && t.getMonto() != null)
+                .map(Tramite::getMonto)
+                .reduce(java.math.BigDecimal.ZERO, java.math.BigDecimal::add);
+    }
 }

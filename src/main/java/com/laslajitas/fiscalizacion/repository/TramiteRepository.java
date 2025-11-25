@@ -14,6 +14,8 @@ public interface TramiteRepository extends JpaRepository<Tramite, Long> {
 
     long countByEstado(EstadoTramite estado);
 
+    long countByTipo(TipoTramite tipo);
+
     long countByTipoAndEstado(TipoTramite tipo, EstadoTramite estado);
 
     @Query("SELECT t FROM Tramite t WHERE t.tipo = 'EVENTO' AND t.fecha >= CURRENT_DATE ORDER BY t.fecha ASC")
