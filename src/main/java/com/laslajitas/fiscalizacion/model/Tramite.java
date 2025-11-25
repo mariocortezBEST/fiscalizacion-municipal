@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import java.time.LocalDate;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "tramites")
@@ -60,4 +61,7 @@ public class Tramite {
     private Boolean tieneElectricidad;
 
     private Boolean tieneGas;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal monto;
 }
