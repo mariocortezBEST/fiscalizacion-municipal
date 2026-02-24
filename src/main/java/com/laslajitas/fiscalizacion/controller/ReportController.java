@@ -90,7 +90,7 @@ public class ReportController {
                                         "Solo se pueden generar certificados para habilitaciones finalizadas");
                 }
 
-                String verificationUrl = "http://localhost:8080/verificar/" + id;
+                String verificationUrl = "http://localhost:8081/verificar/" + id;
                 byte[] qrCodeBytes = qrCodeService.generateQRCodeImage(verificationUrl, 200, 200);
                 ByteArrayInputStream qrCodeStream = new ByteArrayInputStream(qrCodeBytes);
 
