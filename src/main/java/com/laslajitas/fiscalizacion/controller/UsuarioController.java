@@ -35,20 +35,11 @@ public class UsuarioController {
     public String guardar(@ModelAttribute Usuario usuario, @RequestParam(required = false) String rawPassword,
             RedirectAttributes redirectAttributes) {
         try {
-            // Validation: Username must be unique for new users
+
             if (usuario.getId() == null && usuarioService.existsByUsername(usuario.getUsername())) {
                 redirectAttributes.addFlashAttribute("error", "El nombre de usuario ya existe.");
                 return "redirect:/usuarios/nuevo";
             }
-
-            // For existing users, if password is empty, it means we don't want to change
-            // it.
-            // But my service logic for 'save(usuario, rawPassword)' handles encoding if
-            // rawPassword is not empty.
-            // If it is empty, we need to make sure we don't overwrite the existing password
-            // with null/empty if we are just calling save(usuario).
-            // However, the form submission will map fields to 'usuario'. If 'password'
-            // field is empty in form, 'usuario.password' might be null or empty.
 
             if (usuario.getId() != null) {
                 Usuario existing = usuarioService.findById(usuario.getId()).orElse(null);

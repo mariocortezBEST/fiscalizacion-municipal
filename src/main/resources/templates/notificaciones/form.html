@@ -38,7 +38,7 @@
                         <label for="estado" class="form-label">Estado</label>
                         <select class="form-select" id="estado" th:field="*{estado}" th:disabled="${readonly}">
                             <option
-                                th:each="estadoOption : ${T(com.laslajitas.fiscalizacion.model.EstadoTramite).values()}"
+                                th:each="estadoOption : ${T(com.laslajitas.fiscalizacion.enums.EstadoTramite).values()}"
                                 th:value="${estadoOption}" th:text="${estadoOption}"></option>
                         </select>
                     </div>

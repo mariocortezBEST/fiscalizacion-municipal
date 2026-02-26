@@ -1,4 +1,4 @@
-package com.laslajitas.fiscalizacion.model;
+package com.laslajitas.fiscalizacion.enums;
 
 public enum TipoTramite {
     COMERCIAL,

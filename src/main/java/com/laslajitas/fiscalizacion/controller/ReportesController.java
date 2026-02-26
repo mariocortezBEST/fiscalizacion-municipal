@@ -19,24 +19,22 @@ public class ReportesController {
         model.addAttribute("pageTitle", "Reportes y Estadísticas");
 
         // KPIs
-        model.addAttribute("totalTramites", tramiteService.countTramitesByTipo(null)); // Assuming countByTipo(null) or
-                                                                                       // findAll().size() but let's use
-                                                                                       // sum of types or just findAll
-        // Actually countByTipo(null) might fail if I didn't handle it. Let's use
-        // specific counts.
+        model.addAttribute("totalTramites", tramiteService.countTramitesByTipo(null));
+
+
         long totalComercial = tramiteService
-                .countTramitesByTipo(com.laslajitas.fiscalizacion.model.TipoTramite.COMERCIAL);
-        long totalAlcohol = tramiteService.countTramitesByTipo(com.laslajitas.fiscalizacion.model.TipoTramite.ALCOHOL);
-        long totalEventos = tramiteService.countTramitesByTipo(com.laslajitas.fiscalizacion.model.TipoTramite.EVENTO);
-        long totalMultas = tramiteService.countTramitesByTipo(com.laslajitas.fiscalizacion.model.TipoTramite.MULTA);
+                .countTramitesByTipo(com.laslajitas.fiscalizacion.enums.TipoTramite.COMERCIAL);
+        long totalAlcohol = tramiteService.countTramitesByTipo(com.laslajitas.fiscalizacion.enums.TipoTramite.ALCOHOL);
+        long totalEventos = tramiteService.countTramitesByTipo(com.laslajitas.fiscalizacion.enums.TipoTramite.EVENTO);
+        long totalMultas = tramiteService.countTramitesByTipo(com.laslajitas.fiscalizacion.enums.TipoTramite.MULTA);
         long totalNotificaciones = tramiteService
-                .countTramitesByTipo(com.laslajitas.fiscalizacion.model.TipoTramite.NOTIFICACION);
+                .countTramitesByTipo(com.laslajitas.fiscalizacion.enums.TipoTramite.NOTIFICACION);
 
         model.addAttribute("totalTramites",
                 totalComercial + totalAlcohol + totalEventos + totalMultas + totalNotificaciones);
         model.addAttribute("totalRecaudado", tramiteService.sumMontoMultasFinalizadas());
         model.addAttribute("totalPendientes",
-                tramiteService.countTramitesByEstado(com.laslajitas.fiscalizacion.model.EstadoTramite.PENDIENTE));
+                tramiteService.countTramitesByEstado(com.laslajitas.fiscalizacion.enums.EstadoTramite.PENDIENTE));
 
         // Chart Data (Pie - Types)
         model.addAttribute("countComercial", totalComercial);
@@ -47,13 +45,13 @@ public class ReportesController {
 
         // Chart Data (Bar - Status)
         model.addAttribute("countPendiente",
-                tramiteService.countTramitesByEstado(com.laslajitas.fiscalizacion.model.EstadoTramite.PENDIENTE));
+                tramiteService.countTramitesByEstado(com.laslajitas.fiscalizacion.enums.EstadoTramite.PENDIENTE));
         model.addAttribute("countEnProceso",
-                tramiteService.countTramitesByEstado(com.laslajitas.fiscalizacion.model.EstadoTramite.EN_PROCESO));
+                tramiteService.countTramitesByEstado(com.laslajitas.fiscalizacion.enums.EstadoTramite.EN_PROCESO));
         model.addAttribute("countFinalizado",
-                tramiteService.countTramitesByEstado(com.laslajitas.fiscalizacion.model.EstadoTramite.FINALIZADO));
+                tramiteService.countTramitesByEstado(com.laslajitas.fiscalizacion.enums.EstadoTramite.FINALIZADO));
         model.addAttribute("countVencida",
-                tramiteService.countTramitesByEstado(com.laslajitas.fiscalizacion.model.EstadoTramite.VENCIDA));
+                tramiteService.countTramitesByEstado(com.laslajitas.fiscalizacion.enums.EstadoTramite.VENCIDA));
 
         return "reportes/index";
     }

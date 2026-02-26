@@ -15,7 +15,7 @@ public class JasperReportService {
 
     public byte[] exportReport(String reportName, Map<String, Object> parameters, List<?> dataSource, String format)
             throws FileNotFoundException, JRException {
-        // Load file and compile it
+
         File file = ResourceUtils.getFile("classpath:reports/" + reportName + ".jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 

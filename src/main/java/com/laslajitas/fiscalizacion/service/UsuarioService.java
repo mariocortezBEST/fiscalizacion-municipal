@@ -27,29 +27,7 @@ public class UsuarioService {
     }
 
     public Usuario save(Usuario usuario) {
-        // If it's a new user or password is changed (logic handled in controller
-        // usually, but here we ensure encoding)
-        // For simplicity, we assume the controller sets the password only if it's new
-        // or changed.
-        // However, to be safe, we should check if the password is already encoded or
-        // not,
-        // but BCrypt strings look specific.
-        // Better approach: Controller handles "if password not empty, encode it".
-        // Here we just save. But wait, the plan said "CRUD logic + Password Encoding".
 
-        // Let's rely on the controller to pass the raw password if it needs updating,
-        // and we encode it here if it's not null/empty.
-
-        // Actually, a better pattern for update is:
-        // 1. Fetch existing user.
-        // 2. Update fields.
-        // 3. If new password provided, encode and set.
-        // 4. Save.
-
-        // Since we are creating a simple save method, let's assume the controller
-        // prepares the object.
-        // But to be helpful, let's add a specific method for creating/updating with
-        // password handling.
         return usuarioRepository.save(usuario);
     }
 

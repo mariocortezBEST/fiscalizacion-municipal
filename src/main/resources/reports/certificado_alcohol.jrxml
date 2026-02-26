@@ -14,14 +14,14 @@
 	</background>
 	<title>
 		<band height="150" splitType="Stretch">
-			<!-- Header Border -->
+
 			<rectangle>
 				<reportElement x="0" y="0" width="555" height="150" uuid="a1a2a3a4-b1b1-c1c1-d1d1-e1e1e1e1e101"/>
 				<graphicElement>
 					<pen lineWidth="2.0" lineStyle="Solid" lineColor="#003366"/>
 				</graphicElement>
 			</rectangle>
-			<!-- Municipality Title -->
+
 			<staticText>
 				<reportElement x="0" y="20" width="555" height="30" uuid="1a33f6a9-0b0e-452f-b394-f1c4494b04d1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -36,7 +36,7 @@
 				</textElement>
 				<text><![CDATA[Oficina de Fiscalización y Control]]></text>
 			</staticText>
-			<!-- Certificate Title -->
+
 			<staticText>
 				<reportElement x="0" y="95" width="555" height="40" uuid="3c45d6e7-2d2d-563d-d495-f3e5e95e15f3"/>
 				<box>
@@ -54,7 +54,7 @@
 	</title>
 	<detail>
 		<band height="550" splitType="Stretch">
-			<!-- Certificate Number -->
+
 			<staticText>
 				<reportElement x="0" y="20" width="150" height="20" uuid="4d56e7f8-3e3e-674e-e596-a4f6fa6f26a4"/>
 				<textElement verticalAlignment="Middle">
@@ -69,8 +69,8 @@
 				</textElement>
 				<textFieldExpression><![CDATA[String.format("%06d", $F{id})]]></textFieldExpression>
 			</textField>
-			
-			<!-- Main Text -->
+
+
 			<staticText>
 				<reportElement x="0" y="60" width="555" height="60" uuid="6f78a9b0-5050-896a-a708-c6b8bc8b48c6"/>
 				<textElement textAlignment="Justified" verticalAlignment="Top">
@@ -78,8 +78,8 @@
 				</textElement>
 				<text><![CDATA[La Municipalidad de Las Lajitas, en cumplimiento de las ordenanzas municipales vigentes, certifica que el establecimiento que a continuación se detalla CUENTA CON LICENCIA HABILITANTE para la venta de bebidas alcohólicas en regla:]]></text>
 			</staticText>
-			
-			<!-- Business Details Box -->
+
+
 			<rectangle>
 				<reportElement x="30" y="140" width="495" height="200" uuid="7a89b0c1-6161-9a7b-b809-d7c9cd9c59d7"/>
 				<graphicElement>
@@ -150,7 +150,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{direccionLocal}]]></textFieldExpression>
 			</textField>
-			
+
 			<!-- Superficie -->
 			<staticText>
 				<reportElement x="45" y="275" width="180" height="20" uuid="6d78e9f0-5050-8d6e-e788-a6f8f68f48a6"/>
@@ -182,8 +182,8 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha}.toString()]]></textFieldExpression>
 			</textField>
-			
-			<!-- Footer Text -->
+
+
 			<staticText>
 				<reportElement x="0" y="360" width="555" height="40" uuid="0b12c3d4-9494-2b0c-c122-e0d2d02d82e0"/>
 				<textElement textAlignment="Justified" verticalAlignment="Top">
@@ -200,8 +200,7 @@
 				</box>
 				<imageExpression><![CDATA[$P{qrCodeImage}]]></imageExpression>
 			</image>
-			
-			<!-- QR Label -->
+
 			<staticText>
 				<reportElement x="425" y="405" width="120" height="15" uuid="2d34e5f6-1616-4d2e-e344-a2f4f24f04a2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -209,8 +208,8 @@
 				</textElement>
 				<text><![CDATA[CÓDIGO DE VERIFICACIÓN]]></text>
 			</staticText>
-			
-			<!-- Signature Area -->
+
+
 			<line>
 				<reportElement x="50" y="480" width="200" height="1" uuid="3e45f6a7-2727-5e3f-f455-b3a5a35a15b3"/>
 			</line>
@@ -222,8 +221,8 @@
 				<text><![CDATA[Autoridad Municipal
 Oficina de Fiscalización]]></text>
 			</staticText>
-			
-			<!-- Issue Date -->
+
+
 			<staticText>
 				<reportElement x="0" y="525" width="100" height="15" uuid="5a67b8c9-4949-7a5b-b677-d5c7c57c37d5"/>
 				<textElement verticalAlignment="Middle">

@@ -1,7 +1,7 @@
 package com.laslajitas.fiscalizacion.controller;
 
-import com.laslajitas.fiscalizacion.model.EstadoTramite;
-import com.laslajitas.fiscalizacion.model.TipoTramite;
+import com.laslajitas.fiscalizacion.enums.EstadoTramite;
+import com.laslajitas.fiscalizacion.enums.TipoTramite;
 import com.laslajitas.fiscalizacion.repository.TramiteRepository;
 import com.laslajitas.fiscalizacion.service.JasperReportService;
 import com.laslajitas.fiscalizacion.service.QRCodeService;
